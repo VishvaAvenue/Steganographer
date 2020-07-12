@@ -15,7 +15,7 @@ def First_Screen():
     S_Screen.maxsize(1200,800)
     S_Screen.minsize(1200,800)
     
-    Logo_load = Image.open("C:\\Users\\u\\Desktop\\py programmes\\Tkinter_Programmes\\Stegnographer\\data-encryption.png")
+    Logo_load = Image.open("C:\\Users\\u\\Desktop\\py programmes\\Tkinter_Programmes\\Stegnographer\\data-encryption.png") #image path 
 
     Logo_image = ImageTk.PhotoImage(Logo_load)
 
@@ -23,13 +23,13 @@ def First_Screen():
 
     Logo_label.place(x = 420, y = 80)
 
-    encode_img = ImageTk.PhotoImage(file="C:\\Users\\u\\Desktop\\py programmes\\Tkinter_Programmes\\Stegnographer\\button.png")
+    encode_img = ImageTk.PhotoImage(file="C:\\Users\\u\\Desktop\\py programmes\\Tkinter_Programmes\\Stegnographer\\button.png") # image path
     
     encode_b = tk.Button(master=S_Screen, image = encode_img , bd =0, activebackground = "#d8d8d8",relief = tk.GROOVE)
     
     encode_b.place(x = 230, y = 400)
     
-    decode_img = ImageTk.PhotoImage(file="C:\\Users\\u\\Desktop\\py programmes\\Tkinter_Programmes\\Stegnographer\\button (1).png")
+    decode_img = ImageTk.PhotoImage(file="C:\\Users\\u\\Desktop\\py programmes\\Tkinter_Programmes\\Stegnographer\\button (1).png")#image path
     
     decode_b = tk.Button(master=S_Screen, image = decode_img , bd =0, activebackground = "#d8d8d8",relief = tk.SOLID)
     
@@ -45,7 +45,7 @@ window.title("Steganographer By D")
 
 window.geometry("1200x800")
     
-Background_image = Image.open("C:\\Users\\u\\Desktop\\py programmes\\Tkinter_Programmes\\Stegnographer\\bg.jpg")
+Background_image = Image.open("C:\\Users\\u\\Desktop\\py programmes\\Tkinter_Programmes\\Stegnographer\\bg.jpg")#image path
     
 rendered_image = ImageTk.PhotoImage(Background_image)
 
