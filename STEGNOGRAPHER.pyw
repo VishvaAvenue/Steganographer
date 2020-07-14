@@ -1,6 +1,55 @@
 import tkinter as tk                #importing tkinter module
 from PIL import ImageTk, Image      #importing PIL for image processing. 
 
+def back():
+    Encode_tk.destroy()
+    First_Screen()
+
+def Encode():
+    S_Screen.destroy()
+
+    global Encode_tk
+    
+    Encode_tk = tk.Tk()
+    
+    Encode_tk.title("Encode")
+    
+    Encode_tk.geometry("700x700")
+
+    bg_img_load = Image.open("C:\\Users\\u\\Desktop\\py programmes\\Tkinter_Programmes\\Stegnographer\\bg_en.jpg") #image path
+
+    bg_img = ImageTk.PhotoImage(bg_img_load) #rendering image
+
+    bg_label = tk.Label(master= Encode_tk, image = bg_img) #background image Label
+
+    bg_label.place(x = 0, y= 0) #placing the Bg
+
+    back_button_img_load = Image.open("C:\\Users\\u\\Desktop\\py programmes\\Tkinter_Programmes\\Stegnographer\\bbl.png") #loading back button image
+
+    back_button_img = ImageTk.PhotoImage(back_button_img_load) #rendering image
+
+    back_button = tk.Button(master= Encode_tk, image = back_button_img,bd = 0,command = back) #button widgets
+
+    back_button.place(x = 0,y= 2)
+
+    file_name_entry = tk.Entry(bd = 0.1)
+
+    file_name_entry.place(x = 330, y = 194,height = 30,width = 242)
+
+    message_text = tk.Text(bd = 0)
+
+    message_text.place(x = 330 , y = 260,width = 240, height = 180)
+
+        #Working here
+
+
+    
+
+
+    
+
+
+    Encode_tk.mainloop()
 
 def close_open():
     window.destroy()
@@ -15,7 +64,7 @@ def First_Screen():
     S_Screen.maxsize(1200,800)
     S_Screen.minsize(1200,800)
     
-    Logo_load = Image.open("C:\\Users\\u\\Desktop\\py programmes\\Tkinter_Programmes\\Stegnographer\\data-encryption.png") #image path 
+    Logo_load = Image.open("C:\\Users\\u\\Desktop\\py programmes\\Tkinter_Programmes\\Stegnographer\\data-encryption.png")
 
     Logo_image = ImageTk.PhotoImage(Logo_load)
 
@@ -23,13 +72,13 @@ def First_Screen():
 
     Logo_label.place(x = 420, y = 80)
 
-    encode_img = ImageTk.PhotoImage(file="C:\\Users\\u\\Desktop\\py programmes\\Tkinter_Programmes\\Stegnographer\\button.png") # image path
+    encode_img = ImageTk.PhotoImage(file="C:\\Users\\u\\Desktop\\py programmes\\Tkinter_Programmes\\Stegnographer\\button.png")
     
-    encode_b = tk.Button(master=S_Screen, image = encode_img , bd =0, activebackground = "#d8d8d8",relief = tk.GROOVE)
+    encode_b = tk.Button(master=S_Screen, image = encode_img , bd =0, activebackground = "#d8d8d8",relief = tk.GROOVE, command = Encode)
     
     encode_b.place(x = 230, y = 400)
     
-    decode_img = ImageTk.PhotoImage(file="C:\\Users\\u\\Desktop\\py programmes\\Tkinter_Programmes\\Stegnographer\\button (1).png")#image path
+    decode_img = ImageTk.PhotoImage(file="C:\\Users\\u\\Desktop\\py programmes\\Tkinter_Programmes\\Stegnographer\\button (1).png")
     
     decode_b = tk.Button(master=S_Screen, image = decode_img , bd =0, activebackground = "#d8d8d8",relief = tk.SOLID)
     
@@ -45,7 +94,7 @@ window.title("Steganographer By D")
 
 window.geometry("1200x800")
     
-Background_image = Image.open("C:\\Users\\u\\Desktop\\py programmes\\Tkinter_Programmes\\Stegnographer\\bg.jpg")#image path
+Background_image = Image.open("C:\\Users\\u\\Desktop\\py programmes\\Tkinter_Programmes\\Stegnographer\\bg.jpg")
     
 rendered_image = ImageTk.PhotoImage(Background_image)
 
@@ -65,7 +114,7 @@ window_close_button.place(x = 505, y = 400)
     
 greeting.place(x = 200, y = 250)
     
-Background_Label.place(x = 0, y = 0)
+Background_Label.place(x = 0, y = -3)
 
 window.mainloop()
 
