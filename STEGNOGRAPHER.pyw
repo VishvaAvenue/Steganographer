@@ -1,5 +1,9 @@
 import tkinter as tk                #importing tkinter module
 from PIL import ImageTk, Image      #importing PIL for image processing. 
+import tkinter.filedialog as tf
+from stegano import exifHeader as stg
+from tkinter import messagebox
+
 
 def back():
     Encode_tk.destroy()
@@ -16,19 +20,19 @@ def Encode():
     
     Encode_tk.geometry("700x700")
 
-    bg_img_load = Image.open("C:\\Users\\u\\Desktop\\py programmes\\Tkinter_Programmes\\Stegnographer\\bg_en.jpg") #image path
+    bg_img_load = Image.open("C:\\Users\\u\\Desktop\\py programmes\\Tkinter_Programmes\\Stegnographer\\bg_en.jpg")
 
-    bg_img = ImageTk.PhotoImage(bg_img_load) #rendering image
+    bg_img = ImageTk.PhotoImage(bg_img_load)
 
-    bg_label = tk.Label(master= Encode_tk, image = bg_img) #background image Label
+    bg_label = tk.Label(master= Encode_tk, image = bg_img)
 
-    bg_label.place(x = 0, y= 0) #placing the Bg
+    bg_label.place(x = 0, y= 0)
 
-    back_button_img_load = Image.open("C:\\Users\\u\\Desktop\\py programmes\\Tkinter_Programmes\\Stegnographer\\bbl.png") #loading back button image
+    back_button_img_load = Image.open("C:\\Users\\u\\Desktop\\py programmes\\Tkinter_Programmes\\Stegnographer\\bb.png")
 
-    back_button_img = ImageTk.PhotoImage(back_button_img_load) #rendering image
+    back_button_img = ImageTk.PhotoImage(back_button_img_load)
 
-    back_button = tk.Button(master= Encode_tk, image = back_button_img,bd = 0,command = back) #button widgets
+    back_button = tk.Button(master= Encode_tk, image = back_button_img,bd = 0,command = back)
 
     back_button.place(x = 0,y= 2)
 
@@ -38,17 +42,53 @@ def Encode():
 
     message_text = tk.Text(bd = 0)
 
-    message_text.place(x = 330 , y = 260,width = 240, height = 180)
+    message_text.place(x = 330 , y = 260,width = 240, height = 120)
 
-        #Working here
+    Encode_button_img_load =  Image.open("C:\\Users\\u\\Desktop\\py programmes\\Tkinter_Programmes\\Stegnographer\\encode_b.png")
 
+    Encode_button_img = ImageTk.PhotoImage(Encode_button_img_load)
+
+    def openfile():
+        global fileopen
+
+        fileopen = tk.StringVar()
+
+        fileopen = tf.askopenfilename(initialdir = "/Desktop", title = "Select File", filetypes = (("jpeg file", "*jpg"), ("all files","*.*")))
+
+        dirlabel = tk.Entry(master = Encode_tk,bd= 0)
+
+        dirlabel.insert(0, fileopen)
+
+        dirlabel.place(x = 329, y = 402, width = 240, height = 35)
+
+    def Encodee():  	
+        response = messagebox.askyesno("pop up", "Do you want to encode?")
+        
+        if response == 1:    
+        
+            stg.hide(fileopen, file_name_entry.get()+'.jpg',message_text.get(1.0, tk.END))
+        
+            messagebox.showinfo("pop up", "Successfully encode")
+        
+        else:
+        
+            messagebox.showwarning('pop up', "Unsuccessful")
+
+    Encode_button = tk.Button(master=Encode_tk, image = Encode_button_img, bd = 0, command = Encodee)
+
+    Encode_button.place(x =  240, y = 520,height = 68)
 
     
 
 
+    select_img_load = Image.open("C:\\Users\\u\\Desktop\\py programmes\\Tkinter_Programmes\\Stegnographer\\selcet.png")
     
+    select_img = ImageTk.PhotoImage(select_img_load)
 
+    select_button = tk.Button(master=Encode_tk,image = select_img, bd = 0,relief = tk.GROOVE, command = openfile)
 
+    select_button.place(x = 160, y = 400)
+    
     Encode_tk.mainloop()
 
 def close_open():
@@ -86,7 +126,7 @@ def First_Screen():
 
     S_Screen.mainloop()
 
-   
+
     
 window = tk.Tk()
 
@@ -110,11 +150,10 @@ Close_button_image = ImageTk.PhotoImage(Close_button_image_load)
 
 window_close_button = tk.Button(image = Close_button_image, bd = 0, command = close_open)
     
-window_close_button.place(x = 505, y = 400)
+window_close_button.place(x = 460, y = 400)
     
 greeting.place(x = 200, y = 250)
     
 Background_Label.place(x = 0, y = -3)
 
 window.mainloop()
-
