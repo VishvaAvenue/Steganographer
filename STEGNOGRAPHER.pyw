@@ -5,6 +5,14 @@ from stegano import exifHeader as stg
 from tkinter import messagebox
 
 
+def close_open():
+    window.destroy()
+    First_Screen()
+
+def back_decode():
+    Decode_tk.destroy()
+    First_Screen()
+
 def back():
     Encode_tk.destroy()
     First_Screen()
@@ -66,7 +74,8 @@ def Encode():
         
         if response == 1:    
         
-            stg.hide(fileopen, file_name_entry.get()+'.jpg',message_text.get(1.0, tk.END))
+            stg.hide(fileopen, file_name_entry.get()+'..jpg',message_text.get(1.0, tk.END))
+            
         
             messagebox.showinfo("pop up", "Successfully encode")
         
@@ -91,9 +100,73 @@ def Encode():
     
     Encode_tk.mainloop()
 
-def close_open():
-    window.destroy()
-    First_Screen()
+def Decode():
+    S_Screen.destroy()
+
+    global Decode_tk
+
+    Decode_tk = tk.Tk()
+
+    Decode_tk.title("Decode")
+
+    Decode_tk.geometry("700x700")
+
+    bg_img_load = Image.open("C:\\Users\\u\\Desktop\\py programmes\\Tkinter_Programmes\\Stegnographer\\bg_en.jpg")
+
+    bg_img = ImageTk.PhotoImage(bg_img_load)
+
+    bg_label = tk.Label(master= Decode_tk, image = bg_img)
+
+    bg_label.place(x = 0, y= 0)
+
+    back_button_img_load = Image.open("C:\\Users\\u\\Desktop\\py programmes\\Tkinter_Programmes\\Stegnographer\\bb.png")
+
+    back_button_img = ImageTk.PhotoImage(back_button_img_load)
+
+    back_button = tk.Button(master= Decode_tk, image = back_button_img,bd = 0,command = back_decode)
+
+    back_button.place(x = 0,y= 2)
+
+    file_name_entry = tk.Entry(bd = 0.1)
+
+    file_name_entry.place(x = 330, y = 194,height = 30,width = 242)
+
+    message_text = tk.Text(bd = 0)
+
+    message_text.place(x = 330 , y = 260,width = 240, height = 100)
+
+    def openfile():
+        global fileopen1
+
+        fileopen1 = tk.StringVar()
+
+        fileopen1 = tf.askopenfilename(initialdir = "/Desktop", title = "Select File", filetypes = (("jpeg file", "*jpg"), ("all files","*.*")))
+
+        file_name_entry.insert(0,fileopen1)
+
+    def Decodee():
+        message = stg.reveal(fileopen1)
+
+        message_text.insert("1.0", message)
+
+    select_img_load = Image.open("C:\\Users\\u\\Desktop\\py programmes\\Tkinter_Programmes\\Stegnographer\\selcet1.png")
+    
+    select_img = ImageTk.PhotoImage(select_img_load)
+
+    select_button = tk.Button(master=Decode_tk,image = select_img, bd = .3,command = openfile)
+
+    select_button.place(x = 280, y = 130)
+
+    Decode_button_img_load =  Image.open("C:\\Users\\u\\Desktop\\py programmes\\Tkinter_Programmes\\Stegnographer\\decodeb.jpg")
+
+    Decode_button_img = ImageTk.PhotoImage(Decode_button_img_load)
+    
+    Decode_button = tk.Button(master=Decode_tk, image = Decode_button_img, bd = 0,command = Decodee)
+
+    Decode_button.place(x =  250, y = 520)
+
+    Decode_tk.mainloop()
+
 
 def First_Screen():
     global S_Screen
@@ -120,14 +193,15 @@ def First_Screen():
     
     decode_img = ImageTk.PhotoImage(file="C:\\Users\\u\\Desktop\\py programmes\\Tkinter_Programmes\\Stegnographer\\button (1).png")
     
-    decode_b = tk.Button(master=S_Screen, image = decode_img , bd =0, activebackground = "#d8d8d8",relief = tk.SOLID)
+    decode_b = tk.Button(master=S_Screen, image = decode_img , bd =0, activebackground = "#d8d8d8",relief = tk.SOLID,command = Decode)
     
     decode_b.place(x = 670 , y= 400)
 
     S_Screen.mainloop()
 
 
-    
+
+
 window = tk.Tk()
 
 window.title("Steganographer By D")
